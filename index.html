@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Constantin Alexander | Cloud Architect</title>
+    <style>
+        :root {
+            --bg-color: #1a1a1a;
+            --card-color: #2c2c2c;
+            --text-color: #e0e0e0;
+            --primary-color: #4a90e2;
+            --secondary-text: #a0a0a0;
+            --border-color: #444;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* --- Header --- */
+        .header {
+            text-align: center;
+            padding-bottom: 40px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .header h1 {
+            font-size: 2.8em;
+            margin: 0;
+            color: #ffffff;
+        }
+
+        .header .subtitle {
+            font-size: 1.2em;
+            font-weight: 300;
+            color: var(--primary-color);
+            margin: 10px 0;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin-top: 25px;
+        }
+
+        .contact-info a {
+            color: var(--secondary-text);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.95em;
+        }
+
+        .contact-info a:hover {
+            color: var(--primary-color);
+        }
+
+        /* --- Sections --- */
+        .section {
+            margin-top: 40px;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+        }
+
+        /* --- Experience Section --- */
+        .job {
+            background-color: var(--card-color);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--primary-color);
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 5px;
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+        }
+
+        .job-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #ffffff;
+            margin: 0;
+        }
+
+        .job-company {
+            font-weight: normal;
+            color: var(--secondary-text);
+        }
+        
+        .job-date {
+            font-style: italic;
+            color: var(--secondary-text);
+            font-size: 0.9em;
+        }
+
+        .job ul {
+            padding-left: 20px;
+            margin-top: 15px;
+            color: var(--secondary-text);
+        }
+
+        .job li {
+            margin-bottom: 10px;
+        }
+
+        /* --- Skills & Other Sections --- */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-category {
+            background-color: var(--card-color);
+            padding: 20px;
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
+        }
+
+        .skill-category h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+            font-size: 1.1em;
+        }
+        
+        .skill-category p {
+            margin: 0;
+            color: var(--secondary-text);
+        }
+
+        .simple-list p {
+            margin: 5px 0;
+            color: var(--secondary-text);
+        }
+        
+        .simple-list strong {
+            color: var(--text-color);
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            color: var(--secondary-text);
+            font-size: 0.9em;
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 2.2em;
+            }
+            .job-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .job-date {
+                margin-top: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <header class="header">
+            <h1>Constantin Alexander</h1>
+            <p class="subtitle">Cloud Architect | Data Governance | Ai Ops | AWS & GCP Specialist</p>
+            <div class="contact-info">
+                <span>Los Angeles, CA</span>
+                <a href="tel:310-905-0130">310-905-0130</a>
+                <a href="mailto:constantin@dedomena.io">constantin@dedomena.io</a>
+                <a href="https://www.linkedin.com/in/constantin-alexander" target="_blank">LinkedIn Profile</a>
+            </div>
+        </header>
+
+        <section class="section">
+            <h2 class="section-title">Summary</h2>
+            <p>Accomplished Data Platform Architect with extensive experience designing and implementing scalable, high-performance cloud data platforms. Expertise in data governance, cloud migration, and modern data architectures, including HTAP databases, streaming data pipelines, and unified analytics engines. Proven track record in leading cross-functional teams to deliver robust data solutions that drive business value.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Professional Experience</h2>
+            
+            <div class="job">
+                <div class="job-header">
+                    <h3 class="job-title">Data Architect MCP <span class="job-company">@ Irys Insurtech</span></h3>
+                    <span class="job-date">May 2025 - Present</span>
+                </div>
+                <ul>
+                    <li>Led MCP development, VertexAI architecture, and implementation of AI database and performance management.</li>
+                    <li>Focused on Space and Time database (PostgreSQL protocol), an HTAP blockchain decentralized DB, and AlloyDB.</li>
+                    <li>Developed tools, CI/CD pipelines, deployments, schema/change management, and provided product feedback for Space and Time DB.</li>
+                    <li>Managed schema design and AlloyDB implementation, with analytics data materialized using Apache Iceberg.</li>
+                </ul>
+            </div>
+            
+            <div class="job">
+                <div class="job-header">
+                    <h3 class="job-title">Data Architect <span class="job-company">@ O’Reilly Auto Parts</span></h3>
+                    <span class="job-date">August 2023 – May 2025</span>
+                </div>
+                <ul>
+                    <li>Spearheaded GCP and Azure cloud migration and Snowflake data warehouse implementation, including Apache Kafka data pipelines and FiveTran/Informatica ETL processes.</li>
+                    <li>Architected and deployed solutions using VertexAI.</li>
+                    <li>Designed and deployed Apache Iceberg for universal data storage, enabling seamless data sharing between Snowflake and BigQuery.</li>
+                    <li>Managed the migration of over 6000 PostgreSQL databases to AlloyDB.</li>
+                    <li>Implemented Alation data catalog for data governance, ensuring GDPR/CCPA compliance, data lineage, and PII tagging.</li>
+                    <li>Developed secure GCP Data Lake solutions, integrating Data Plex, DataFusion, Pub/Sub, and BigQuery.</li>
+                </ul>
+            </div>
+
+            <div class="job">
+                <div class="job-header">
+                    <h3 class="job-title">GCP Data Lake Architect <span class="job-company">@ Windsor Store</span></h3>
+                    <span class="job-date">April 2023 – August 2023</span>
+                </div>
+                <ul>
+                    <li>Designed and implemented a Google Cloud Data Lake, leveraging Data Plex, DataFusion, and Pub/Sub for data ingestion and transformation.</li>
+                    <li>Developed secure BigQuery data models with granular row and column-level security.</li>
+                    <li>Established data governance frameworks using GCP Data Catalog to ensure compliance and data lineage.</li>
+                </ul>
+            </div>
+
+            <div class="job">
+                <div class="job-header">
+                    <h3 class="job-title">Staff Data Architect <span class="job-company">@ CareRev</span></h3>
+                    <span class="job-date">March 2022 – April 2023</span>
+                </div>
+                <ul>
+                    <li>Deployed Confluent Kafka as a unified messaging platform for real-time data capture and transformation for ML and analytics.</li>
+                    <li>Implemented Secoda data catalog for data governance, ensuring HIPAA, GDPR, and CCPA compliance.</li>
+                    <li>Migrated databases (PostgreSQL to RDS) and messaging systems (Kafka to Confluent Cloud) from Heroku to AWS.</li>
+                    <li>Migrated PostgreSQL databases to GCP AlloyDB to support hybrid transactional and analytics workloads.</li>
+                    <li>Optimized ETL/ELT processes using FiveTran and DBT for efficient data transformation.</li>
+                </ul>
+            </div>
+
+            <div class="job">
+                <div class="job-header">
+                    <h3 class="job-title">Cloud Data Architect <span class="job-company">@ 365 Retail Markets</span></h3>
+                    <span class="job-date">July 2018 – January 2022</span>
+                </div>
+                <ul>
+                    <li>Led migration from on-premise data centers to AWS, including RDS replication and Snowflake data warehouse deployment.</li>
+                    <li>Designed and implemented a streaming data lake using Kafka, CDC connectors, and Snowflake sink connectors.</li>
+                    <li>Managed MySQL databases on AWS RDS, using ProxySQL for read/write distribution and Percona PMM for monitoring.</li>
+                    <li>Developed Hadoop EMR/Spark pipelines for data ingestion and transformation.</li>
+                </ul>
+            </div>
+            
+            </section>
+        
+        <section class="section">
+            <h2 class="section-title">Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Data Platforms</h3>
+                    <p>Snowflake, BigQuery, RedShift, Apache Iceberg, Polaris Catalog</p>
+                </div>
+                <div class="skill-category">
+                    <h3>Streaming & Messaging</h3>
+                    <p>Apache Kafka, Confluent Cloud, KsqlDB, Apache Pulsar</p>
+                </div>
+                <div class="skill-category">
+                    <h3>Databases</h3>
+                    <p>MySQL, MariaDB, PostgreSQL, Cassandra, Oracle RAC, Galera Cluster, AlloyDB</p>
+                </div>
+                <div class="skill-category">
+                    <h3>Cloud Platforms</h3>
+                    <p>GCP, AWS, Azure</p>
+                </div>
+                 <div class="skill-category">
+                    <h3>Data Governance</h3>
+                    <p>Alation, Secoda, GDPR, CCPA, HIPAA</p>
+                </div>
+                <div class="skill-category">
+                    <h3>ETL/ELT & Tools</h3>
+                    <p>FiveTran, DBT, Informatica, Hadoop EMR, Spark, DataFusion, Data Plex, Pub/Sub</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Education</h2>
+            <div class="simple-list">
+                <p><strong>Bachelor’s Degree in Accounting</strong> - City University, Seattle, WA (1993–1997)</p>
+                <p><strong>Oracle Consulting Bootcamp</strong> - Oracle Corporation (1996)</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Contributions & Languages</h2>
+            <div class="skills-grid">
+                 <div class="skill-category">
+                    <h3>Open Source Contributions</h3>
+                    <p>ProxySQL</p>
+                </div>
+                 <div class="skill-category">
+                    <h3>Languages</h3>
+                    <p>English (Fluent), Spanish (Fluent), Russian (Fluent)</p>
+                </div>
+            </div>
+        </section>
+        
+        <footer>
+            <p>&copy; 2025 Constantin Alexander</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
