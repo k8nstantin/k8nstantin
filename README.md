@@ -4,67 +4,101 @@
 
 ---
 
-## Pioneering Spec-Driven Development with AI
+AI expert specializing in **autonomous agent governance**, **deployment control**, and **AI-powered data intelligence**. Creator of OpenLoom. Builder of production AI systems that give organizations real control over how AI agents work, what they cost, and what they produce.
 
-I created **[OpenLoom](https://github.com/k8nstantin/openloom)** — a new approach to software development I call **Spec-Driven Development (SDD)**.
+---
 
-The idea: stop treating AI as a coding assistant and start treating it as a workforce. You write specifications. AI agents build what you specified. Machines audit the result. Humans approve and release. That's the full cycle — and OpenLoom is the framework that makes it work.
+## OpenLoom — AI Agent Governance & Development Framework
 
-**The problem it solves:** AI coding agents are powerful but unaccountable. They hallucinate completion, skip steps, deviate from instructions, and you have no way to track what they actually did or what it cost. Every session starts from zero — no memory of past decisions, no awareness of other agents working on the same codebase, no enforcement of your engineering standards.
+**[github.com/k8nstantin/openloom](https://github.com/k8nstantin/openloom)**
 
-**How OpenLoom helps:**
-- Write a product spec once. Break it into manifests (detailed specs) and tasks with dependency chains. Agents receive the full context automatically.
-- Autonomous agents spawn, branch, code, commit, and open PRs without hand-holding. They inherit memory from every previous session — decisions, patterns, bugs, and constraints carry forward.
-- A server-side watcher audits every task the agent can't see or game. Three gates: code committed? builds? deliverables addressed? Fail and you're flagged.
-- Visceral rules enforce your standards. "Every change gets its own branch." "Daily budget is $100." Agents must acknowledge rules before starting. Violations caught automatically.
-- Full transparency — every conversation, every tool call, every dollar, every line of code tracked. Productivity scoring shows completion rates, first-attempt success, cost per task, trends over time.
-- Peer-to-peer sync — multiple machines share context via Automerge CRDTs. Your whole team's AI sessions learn from each other.
+The core problem: AI coding agents are powerful but ungovernable. They hallucinate completion, deviate from instructions, start every session from zero, and give you no visibility into cost, quality, or compliance. OpenLoom fixes this with a **Spec-Driven Development** framework:
+
+- **Agent Governance** — Visceral rules are non-negotiable constraints agents must acknowledge before starting. Violations detected and flagged automatically. You set the rules once, every agent follows them.
+- **Deployment Control** — Products break into specs (manifests) with dependency chains. Tasks execute sequentially. Agents spawn autonomously into their own branches, commit, push, PR.
+- **Independent Auditing** — A server-side watcher the agent can't see or bypass checks every task: code committed? builds? deliverables addressed? Agents don't grade themselves.
+- **Full Cost & Productivity Tracking** — Every dollar, turn, line of code tracked per task, per agent, per day. Productivity scoring, completion rates, first-attempt success, 7-day trends.
+- **Persistent Memory** — Decisions, bugs, patterns carry across sessions and agents. New sessions inherit everything. Multiple machines sync peer-to-peer via Automerge CRDTs.
 
 19,000+ lines of Go. 40+ MCP tools. 70+ API endpoints. 16-tab dashboard. Single binary.
 
-I use it every day to build itself — and it's changing how I think about what one person can ship.
+---
+
+## Schema Intelligence — Semantic Search Across Your Entire Database
+
+At **Gryphon AI**, built an AI knowledge network that lets you **search 17,000+ database objects by natural language**.
+
+17,000+ tables, stored procedures, views, events, and triggers across 27 databases and 5 servers — each one summarized by Gemini 2.5 Pro with PII detection and index analysis. Embedded with text-embedding-005 and indexed in Vertex AI Vector Search.
+
+Ask "what tables handle customer billing?" and it searches every object semantically, enriches from BigQuery, and answers with source citations. Three modes: **explore** (search anything), **impact analysis** (what breaks if I change this?), **migration planning** (generate a plan for moving this system). Multi-turn chat with session persistence. Deployed serverless on Cloud Run.
+
+The full pipeline — parsing, AI summarization, embedding, knowledge graph, categorization — runs as a single atomic Dataproc Serverless job. Rebuilds for ~$30.
 
 ---
 
-## AI-Powered Data Intelligence
+## 30+ Years of Data Platform Experience
 
-At **Gryphon AI**, I built an AI knowledge network that made 17,000+ database objects across 27 databases and 5 servers searchable by natural language. Every table, stored procedure, view, event, and trigger — summarized by Gemini 2.5 Pro, embedded for semantic search with Vertex AI Vector Search, and queryable through a RAG chatbot.
+All of the AI work above is built on decades of hands-on database and infrastructure engineering:
 
-Ask it "what tables handle customer billing?" and it searches 17,000 objects, enriches results from BigQuery, and answers with source citations. Three modes — explore, impact analysis ("what breaks if I change this table?"), and migration planning. Multi-turn conversations with session persistence. The entire pipeline rebuilds for about $30 on serverless Dataproc.
+**Gryphon AI** — Lead Data Architect. Serverless Apache Iceberg lakehouse on GCP (BigLake, BigQuery, Dataproc Serverless, Apache Doris, Terraform). Schema intelligence chatbot. OpenLoom.
 
-This is what happens when you combine 20 years of database knowledge with modern AI — you stop reading schema docs and start having conversations with them.
+**ProxySQL** — MySQL/PostgreSQL connection pooling, query routing, and caching at scale.
+
+**O'Reilly Auto Parts** — GCP/Azure cloud migration. Snowflake + Apache Kafka + FiveTran/Informatica. Apache Iceberg across Snowflake and BigQuery. 6,000+ PostgreSQL to AlloyDB migration. Alation data catalog for GDPR/CCPA. GCP Data Lake with DataPlex, DataFusion, Pub/Sub.
+
+**CareRev** — Confluent Kafka as unified data pipeline. PostgreSQL CDC via Debezium to S3/Snowflake. KsqlDB for inflight analytics. Full Heroku to AWS migration.
+
+**Everflow** — Live-migrated GCP CloudSQL MySQL 5.6→5.7 with zero downtime when Google said it required multi-day outage.
+
+**365 Retail Markets** — On-premise to AWS migration. Snowflake, Kafka CDC, streaming data lake. MySQL with ProxySQL. Hadoop EMR/Spark pipelines.
+
+**Telmate** — MySQL/MariaDB HA on PCI Flash/ZFS. ScaleArc. AWS Aurora/RDS. Redshift. Snowflake DSS pilot.
+
+**Walmart eCommerce** — MySQL Galera architecture and deployment at scale.
+
+**SpringbokSQL** — Founded. MySQL/MariaDB appliances on FusionIO PCI Flash. Synchronous replication. Columnar DSS analytics. Postgres-XL.
+
+**Ultimate Gaming** — 99.999% uptime on synchronous replication. Virident PCI Flash. Reports from hours to minutes. Cassandra for gaming messaging.
+
+**AccelerationDB** — MySQL at scale. MHA vs Tungsten. Silicon Valley MySQL Meetup organizer.
+
+**Akiban Technologies** — Lead Database Architect. AkibanDB group index. Product roadmap. First customer deployment.
+
+**Apple** — Databases Architect, iAd platform.
+
+**Continuent** — Architect. Tungsten carrier-grade replication for MySQL, PostgreSQL, Oracle.
+
+**HubSpot** — MySQL multi-master replication. Pentaho DW.
+
+**Xerox Global Services** — Oracle Applications 11i, Data Guard, ERP management.
+
+**24 Hour Fitness** — Oracle Applications, PeopleSoft. SOX compliance. Led applications support.
+
+**GE** — Server consolidation. Oracle Financials.
+
+**Texas Instruments** — Oracle Applications ERP deployment.
+
+**Oracle Corporation** — Managing/Principal Consultant. Applications architecture. Team of six.
+
+**JBS Corporation** — Principal Consultant. ERP implementations. Team of five. 6 years.
 
 ---
 
-## Data Platform Architecture
+## Published
 
-Technology leader and Data Platform Architect with over 20 years of experience designing data solutions across telecom, finance, healthcare, and SaaS.
-
-**Gryphon AI** — Designed a fully serverless Apache Iceberg lakehouse on GCP. No persistent clusters. Dataproc Serverless for compute, BigLake REST Catalog for metadata, BigQuery for SQL. Modular Terraform. Zero idle costs. Built the schema intelligence chatbot. Created OpenLoom.
-
-**SpringbokSQL** — Founded a MySQL/MariaDB consultancy. Benchmarked Virident vs Fusion IO for database workloads. Published technical comparisons on high-availability architectures that the community still references.
-
-**AccelerationDB** — MySQL replication at enterprise scale. MHA vs Continuent Tungsten. Multi-source replication, automated failover. The infrastructure that keeps data flowing when things go wrong.
-
-20+ years across Miami, Los Angeles, San Francisco, New York, Boston, Las Vegas, and Carlsbad.
-
----
-
-## Articles
-
-| Date | | Likes |
-|------|-|-------|
-| Oct 2025 | [MySQL and MariaDB so similar, alas so different](https://www.linkedin.com/pulse/mysql-mariadb-so-similar-alas-different-constantin-alexander--ifu9e) — GTID incompatibilities, replication, migration strategies | 71 |
-| Oct 2025 | [Demystify SQL](https://www.linkedin.com/pulse/demystify-sql-constantin-alexander--7lyoe) — How queries actually execute, join algorithms, EXPLAIN plans | 16 |
-| Oct 2025 | [PostgreSQL + Apache Flink CDC](https://www.linkedin.com/pulse/postgresql-apache-flink-cdc-integration-constantin-alexander--qhnle) — Real-time streaming from WAL to analytics | 24 |
-| Oct 2025 | [Apache Iceberg Maintenance](https://www.linkedin.com/pulse/easy-apache-iceberg-maintenance-guide-constantin-alexander-oq8ve) — Compaction, snapshot expiry, 40-60% storage savings | 9 |
-| Sep 2025 | [PostgreSQL Patroni Integration](https://www.linkedin.com/pulse/easy-postgresql-patroni-intergration-constantin-alexander-tc8je) — Automated HA with etcd, HAProxy, failover | 35 |
-| Sep 2025 | [Terraform Modules](https://www.linkedin.com/pulse/easy-terraform-modules-constantin-alexander-9hlne) — Modular infrastructure as code | 7 |
-| Sep 2025 | [Apache Paimon + Iceberg](https://www.linkedin.com/pulse/apache-paimon-iceberg-constantin-alexander-jey5e) — Lakehouse table format comparison | 6 |
-| Sep 2025 | [PostgreSQL Physical Replication](https://www.linkedin.com/pulse/postgresql-physical-replication-easy-guide-constantin-alexander-sh5ie) — WAL streaming, synchronous standby, cascading replicas | 49 |
-| Sep 2025 | [PostgreSQL Logical Replication](https://www.linkedin.com/pulse/postgresql-logical-replication-constantin-alexander-hzlae) — Publication/subscription, selective replication | 42 |
-| Sep 2025 | [PostgreSQL Backup Strategies](https://www.linkedin.com/pulse/easy-postgresql-backup-strategies-complete-guide-constantin-alexander-uvlye) — pg_dump to PITR, cloud-native backup | 48 |
-| 2014 | Virident vs Fusion IO — MySQL/MariaDB storage benchmarks (SpringbokSQL) | |
+| Date | Article | Likes |
+|------|---------|-------|
+| Oct 2025 | [MySQL and MariaDB so similar, alas so different](https://www.linkedin.com/pulse/mysql-mariadb-so-similar-alas-different-constantin-alexander--ifu9e) | 71 |
+| Oct 2025 | [Demystify SQL](https://www.linkedin.com/pulse/demystify-sql-constantin-alexander--7lyoe) | 16 |
+| Oct 2025 | [PostgreSQL + Apache Flink CDC](https://www.linkedin.com/pulse/postgresql-apache-flink-cdc-integration-constantin-alexander--qhnle) | 24 |
+| Oct 2025 | [Apache Iceberg Maintenance](https://www.linkedin.com/pulse/easy-apache-iceberg-maintenance-guide-constantin-alexander-oq8ve) | 9 |
+| Sep 2025 | [PostgreSQL Patroni HA](https://www.linkedin.com/pulse/easy-postgresql-patroni-intergration-constantin-alexander-tc8je) | 35 |
+| Sep 2025 | [Terraform Modules](https://www.linkedin.com/pulse/easy-terraform-modules-constantin-alexander-9hlne) | 7 |
+| Sep 2025 | [Apache Paimon + Iceberg](https://www.linkedin.com/pulse/apache-paimon-iceberg-constantin-alexander-jey5e) | 6 |
+| Sep 2025 | [PostgreSQL Physical Replication](https://www.linkedin.com/pulse/postgresql-physical-replication-easy-guide-constantin-alexander-sh5ie) | 49 |
+| Sep 2025 | [PostgreSQL Logical Replication](https://www.linkedin.com/pulse/postgresql-logical-replication-constantin-alexander-hzlae) | 42 |
+| Sep 2025 | [PostgreSQL Backup Strategies](https://www.linkedin.com/pulse/easy-postgresql-backup-strategies-complete-guide-constantin-alexander-uvlye) | 48 |
+| 2014 | Virident vs Fusion IO — MySQL/MariaDB benchmarks (SpringbokSQL) | |
 | 2012 | MySQL MHA vs Continuent Tungsten (AccelerationDB) | |
 
 ---
@@ -73,4 +107,4 @@ Technology leader and Data Platform Architect with over 20 years of experience d
 
 > *"Exceptionally technically skilled with great manager/architect potential."*
 
-Organizer, **The Silicon Valley MySQL Meetup** | English, Russian, Spanish — all native
+English, Russian, Spanish — all native | Organizer, **The Silicon Valley MySQL Meetup** | City University of Seattle
