@@ -52,11 +52,13 @@ Designed and deployed a fully serverless Apache Iceberg lakehouse on GCP. No per
 
 ---
 
-## Background
+## How I Can Help
 
-Data Platform Architect at **Gryphon AI**. 20+ years across telecom, finance, healthcare, and SaaS. MySQL, MariaDB, PostgreSQL at enterprise scale — migrations, HA, replication, performance, disaster recovery. Serverless architecture on GCP. Trilingual: English, Russian, Spanish.
+If you're looking to bring AI agents into your development workflow — not as chat assistants, but as autonomous builders — I wrote the framework for it. OpenLoom is spec-driven development in practice: you define what to build, agents execute, machines audit. I can help you implement this in your org.
 
-Organizer of **The Silicon Valley MySQL Meetup**. 30K+ followers on [LinkedIn](https://www.linkedin.com/in/constantin-alexander/).
+If you're exploring AI enablement and don't know where to start — I've been through the full cycle. From "let's try Copilot" to building a production platform that spawns, monitors, audits, and cost-tracks autonomous agent sessions. I know what works, what doesn't, and where the money goes.
+
+20+ years of data platform architecture underneath all of it. Currently at **Gryphon AI**. Trilingual: English, Russian, Spanish. 30K+ on [LinkedIn](https://www.linkedin.com/in/constantin-alexander/). Organizer of **The Silicon Valley MySQL Meetup**.
 
 ## Published Work
 
