@@ -1,6 +1,6 @@
 # Constantin Alexander
 
-**AI Pioneer & Data Platform Architect** | 20+ years designing data systems | Building autonomous AI agent systems
+**AI Development Framework Builder & Data Platform Architect** | 20+ years designing data systems | Creator of OpenLoom
 
 ---
 
@@ -10,7 +10,7 @@ I build systems where AI agents work autonomously — writing code from specs, a
 
 **What I've built:**
 
-**OpenLoom** — A spec-driven development platform where you define products as specs, and autonomous AI agents build them. The agents spawn independently, execute against manifests, get audited by a server-side watcher they can't override, and share memory across sessions. 19,000+ lines of Go, 40+ MCP tools, 16-tab dashboard, peer-to-peer sync. *This is what autonomous software development looks like.*
+**OpenLoom** — A spec-driven development platform where you define products as specs, and autonomous AI agents build them. The agents spawn independently, execute against manifests, get audited by a server-side watcher they can't override, and share memory across sessions. Every dollar spent, every turn taken, every line of code written is tracked — real-time cost analytics, productivity scoring, and efficiency metrics per task, per agent, per day. You see exactly what autonomous development costs and what it produces. 19,000+ lines of Go, 40+ MCP tools, 16-tab dashboard, peer-to-peer sync. *This is what autonomous software development looks like — measured, audited, and cost-controlled.*
 
 **Schema Intelligence Chatbot** — AI-powered knowledge network over 17,000+ MySQL database objects across 27 databases and 5 servers. Gemini 2.5 Pro summarizes every table, stored procedure, view, event, and trigger. Embeddings power semantic search via Vertex AI Vector Search. A RAG chatbot answers natural language questions about schema architecture, generates impact analysis, and produces migration plans. *Ask it "what tables store customer data?" and it searches 17,000 objects semantically.*
 
@@ -20,9 +20,9 @@ I build systems where AI agents work autonomously — writing code from specs, a
 
 ### Featured Projects
 
-#### [OpenLoom](https://github.com/k8nstantin/openloom) — Spec-Driven Development Platform for Autonomous Agents
+#### [OpenLoom](https://github.com/k8nstantin/openloom) — AI Development Framework
 
-Write specs. Agents build. Watcher audits. Humans approve.
+The framework for building software with autonomous AI agents. Write specs. Agents build. Watcher audits. Humans approve. Every dollar tracked.
 
 - **Products > Manifests > Tasks** — hierarchical spec-driven development with dependency chains
 - **Autonomous Execution** — spawns independent Claude Code / Cursor sessions from specs
@@ -30,6 +30,7 @@ Write specs. Agents build. Watcher audits. Humans approve.
 - **Visceral Rules** — non-negotiable constraints every agent must follow, violations flagged automatically
 - **Shared Memory** — decisions, patterns, and context persist across all sessions and agents
 - **Peer Sync** — multiple machines discover each other via mDNS and sync via Automerge CRDTs
+- **Cost & Efficiency Tracking** — every dollar, every turn, every line of code tracked per task, per agent, per day
 - **Productivity Scoring** — real-time metrics: lines committed, completion rates, cost per task, 7-day trends
 - **Dashboard** — 16-tab UI with task monitoring, cost analytics, DAG visualization, compliance tracking
 
