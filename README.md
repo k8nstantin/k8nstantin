@@ -14,24 +14,6 @@ At **AccelerationDB** I worked on MySQL replication at scale — MHA vs Continue
 
 ---
 
-## Deep Technical Knowledge
-
-This is what I actually know, from building it and writing about it:
-
-**Replication & High Availability** — MySQL GTID vs MariaDB domain-based GTIDs and why they're incompatible. PostgreSQL streaming replication with WAL archiving, synchronous standby, cascading replicas. Patroni for automated failover with etcd clustering, HAProxy load balancing, split-brain prevention. I've configured all of these in production and written the guides people use to learn them.
-
-**Database Internals** — How SQL actually executes: the 9-step pipeline from FROM to LIMIT. Why nested loop joins are O(n*m) while hash joins are O(n+m). Reading EXPLAIN plans — buffer hits vs disk reads, cardinality estimates, sargable predicates. The difference between knowing SQL syntax and understanding what the engine does with it.
-
-**Change Data Capture** — PostgreSQL logical replication into Apache Flink for real-time streaming. CDC pipeline design with Kafka sinks, Iceberg sinks, tumbling window aggregations. Checkpoint configuration, backpressure management, schema evolution. End-to-end from database WAL to analytics warehouse.
-
-**Data Lakehouse** — Apache Iceberg table maintenance: compaction (40-60% storage reduction), snapshot expiration, orphan file cleanup, Z-ordering for query optimization. Orchestration with Airflow DAGs and Kubernetes CronJobs. Cost modeling per file, per snapshot, per compute job.
-
-**Backup & Recovery** — PostgreSQL pg_dump, pg_basebackup, WAL archiving, PITR. Size-specific strategies from 10GB to multi-terabyte. Automated validation frameworks that verify referential integrity after restore. Cloud-native backup across AWS RDS, GCP Cloud SQL, Azure PostgreSQL.
-
-**AI Agent Orchestration** — Building OpenLoom taught me how to make AI agents productive: spec-driven task decomposition, dependency chains, autonomous execution with MCP protocol, server-side auditing that agents can't game, cost tracking per task per turn per line of code, shared memory across sessions, peer-to-peer sync with Automerge CRDTs.
-
----
-
 ## OpenLoom
 
 The project I'm most focused on. A spec-driven development framework for autonomous coding agents.
