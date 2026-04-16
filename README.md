@@ -2,15 +2,15 @@
 
 # Constantin Alexander
 
-I've spent 20+ years building data systems that power enterprises — MySQL fleets, MariaDB migrations, Spark pipelines, serverless lakehouses on GCP. I've done the hard infrastructure work at companies across Miami, LA, San Francisco, New York, and Boston.
+What happens when you stop asking AI to help you code — and start giving it the entire job?
 
-But here's what I'm doing now that matters most: I'm building the framework that lets AI agents write production software autonomously.
+That's the question I've been obsessing over. After 20 years of building data platforms — migrating databases, designing lakehouses, tuning systems at scale — I realized the next leap isn't better tools for developers. It's developers that are tools themselves.
 
-Not using Copilot to autocomplete lines. Not chatting with Claude for code suggestions. I built a full development platform where you write a spec, and AI agents pick it up, create a branch, write the code, commit it, push it, create a PR — and then a server-side auditor they can't see or override checks every commit, verifies the build passes, and confirms the deliverables were addressed. If any gate fails, the agent's work is rejected. No human babysitting required.
+So I built [OpenLoom](https://github.com/k8nstantin/openloom) — a framework where you write a spec, and AI agents do the rest. They pick up the task, create a branch, write the code, commit, push, open a PR. A server-side auditor checks their work — did they actually commit? Does it compile? Did they address the spec? The agent doesn't even know it's being watched.
 
-Every dollar spent, every turn taken, every line of code written is tracked. Every conversation with every agent is recorded. Every tool call, every file edit, every git operation — captured and searchable. You know exactly what autonomous development costs, what it produces, and how every decision was made.
+Every conversation is recorded. Every tool call captured. Every dollar tracked. You can see exactly what each agent did, what it cost, and whether it followed the rules.
 
-That's [OpenLoom](https://github.com/k8nstantin/openloom).
+It's early. It's messy. And it's the most exciting thing I've ever worked on.
 
 ---
 
