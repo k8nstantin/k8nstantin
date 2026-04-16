@@ -60,11 +60,20 @@ If you need someone who can architect your data platform **and** lead your AI en
 
 ## Published Work
 
-- [MySQL and MariaDB so similar, alas so different](https://www.linkedin.com/pulse/mysql-mariadb-so-similar-alas-different-constantin-alexander--ifu9e) (2025, 71 likes)
-- [Demystify SQL](https://www.linkedin.com/pulse/demystify-sql-constantin-alexander--7lyoe) (2025)
-- [PostgreSQL and Apache Flink CDC Integration](https://www.linkedin.com/pulse/postgresql-apache-flink-cdc-integration-constantin-alexander--qhnle) (2025)
-- Battle of the Titans — Virident vs Fusion IO in MySQL/MariaDB tests (2014)
-- MySQL MHA vs Continuent Tungsten comparison (2012)
+| Article | Likes |
+|---------|-------|
+| [MySQL and MariaDB so similar, alas so different](https://www.linkedin.com/pulse/mysql-mariadb-so-similar-alas-different-constantin-alexander--ifu9e) | 71 |
+| [Easy PostgreSQL Backup Strategies: Complete Guide](https://www.linkedin.com/pulse/easy-postgresql-backup-strategies-complete-guide-constantin-alexander-uvlye) | 48 |
+| [PostgreSQL Physical Replication, Easy Guide](https://www.linkedin.com/pulse/postgresql-physical-replication-easy-guide-constantin-alexander-sh5ie) | 49 |
+| [PostgreSQL Logical Replication](https://www.linkedin.com/pulse/postgresql-logical-replication-constantin-alexander-hzlae) | 42 |
+| [Easy PostgreSQL Patroni Integration](https://www.linkedin.com/pulse/easy-postgresql-patroni-intergration-constantin-alexander-tc8je) | 35 |
+| [PostgreSQL and Apache Flink CDC Integration](https://www.linkedin.com/pulse/postgresql-apache-flink-cdc-integration-constantin-alexander--qhnle) | 24 |
+| [Demystify SQL](https://www.linkedin.com/pulse/demystify-sql-constantin-alexander--7lyoe) | 16 |
+| [Easy Apache Iceberg Maintenance Guide](https://www.linkedin.com/pulse/easy-apache-iceberg-maintenance-guide-constantin-alexander-oq8ve) | 9 |
+| [Easy Terraform Modules](https://www.linkedin.com/pulse/easy-terraform-modules-constantin-alexander-9hlne) | 7 |
+| [Apache Paimon + Apache Iceberg](https://www.linkedin.com/pulse/apache-paimon-iceberg-constantin-alexander-jey5e) | 6 |
+| Battle of the Titans — Virident vs Fusion IO in MySQL/MariaDB tests (2014) | - |
+| MySQL MHA vs Continuent Tungsten comparison (2012) | - |
 
 ## Community
 
