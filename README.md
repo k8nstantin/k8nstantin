@@ -52,19 +52,11 @@ Designed and deployed a fully serverless Apache Iceberg lakehouse on GCP. No per
 
 ---
 
-## 20 Years, 7 Cities
+## Background
 
-I've built data systems at enterprise scale across Miami, Los Angeles, San Francisco, New York, Boston, Las Vegas, and Carlsbad. Telecom, finance, healthcare, SaaS — different industries, same obsession: making data reliable, fast, and accessible.
+Data Platform Architect at **Gryphon AI**. 20+ years across telecom, finance, healthcare, and SaaS. MySQL, MariaDB, PostgreSQL at enterprise scale — migrations, HA, replication, performance, disaster recovery. Serverless architecture on GCP. Trilingual: English, Russian, Spanish.
 
-Currently at **Gryphon AI** in Miami, where I designed the serverless data lakehouse, built the schema intelligence chatbot, and created OpenLoom.
-
-**City University of Seattle** (1993-1997) | Becker CPA Academic Achievement (1996)
-
-## What I Can Help With
-
-IT consulting, database development, application development, data recovery, team building, leadership development, change management, digital marketing strategy, and brand marketing.
-
-Or if you're trying to figure out how to make AI agents actually productive in your engineering org — that's where things get interesting.
+Organizer of **The Silicon Valley MySQL Meetup**. 30K+ followers on [LinkedIn](https://www.linkedin.com/in/constantin-alexander/).
 
 ## Published Work
 
@@ -83,10 +75,6 @@ Or if you're trying to figure out how to make AI agents actually productive in y
 | Battle of the Titans — Virident vs Fusion IO in MySQL/MariaDB tests (2014) | - |
 | MySQL MHA vs Continuent Tungsten comparison (2012) | - |
 
-## Community
-
-Organizer of **The Silicon Valley MySQL Meetup**. 30K+ followers on [LinkedIn](https://www.linkedin.com/in/constantin-alexander/). Published author on database architecture and distributed systems.
-
 ## Connect
 
-[LinkedIn](https://www.linkedin.com/in/constantin-alexander/) | [dedomena.io](https://dedomena.io) | English, Russian, Spanish (all native)
+[LinkedIn](https://www.linkedin.com/in/constantin-alexander/) | [dedomena.io](https://dedomena.io)
