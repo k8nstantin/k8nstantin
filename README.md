@@ -36,7 +36,7 @@ The full pipeline — parsing, AI summarization, embedding, knowledge graph, cat
 
 ---
 
-## 30+ Years of Data Platform Experience
+## Data Platform Experience
 
 All of the AI work above is built on decades of hands-on database and infrastructure engineering:
 
