@@ -1,83 +1,85 @@
 # Constantin Alexander
 
-**AI Development Framework Builder & Data Platform Architect** | 20+ years designing data systems | Creator of OpenLoom
+**Creator of OpenLoom** | **AI Development Framework Pioneer** | **Data Platform Architect**
+
+20+ years building data systems that power enterprises. Now pioneering the next frontier: autonomous AI agents that build software from specifications, audit their own work, track every dollar spent, and learn from every session.
+
+I don't use AI to help me code. I build frameworks where AI codes autonomously — and I built the tools to measure, audit, and control that process.
 
 ---
 
-### Pioneering AI Agent Development
+## What I've Built
 
-I build systems where AI agents work autonomously — writing code from specs, auditing their own output, and coordinating across sessions. Not prompting AI to help me code. Building AI that codes independently, follows rules, and gets audited by machines — not humans.
+### OpenLoom — The AI Development Framework
 
-**What I've built:**
+**The first spec-driven development framework for autonomous coding agents.**
 
-**OpenLoom** — A spec-driven development platform where you define products as specs, and autonomous AI agents build them. The agents spawn independently, execute against manifests, get audited by a server-side watcher they can't override, and share memory across sessions. Every dollar spent, every turn taken, every line of code written is tracked — real-time cost analytics, productivity scoring, and efficiency metrics per task, per agent, per day. You see exactly what autonomous development costs and what it produces. 19,000+ lines of Go, 40+ MCP tools, 16-tab dashboard, peer-to-peer sync. *This is what autonomous software development looks like — measured, audited, and cost-controlled.*
+OpenLoom is a complete operating system for AI-powered software development. You define what you want built as structured specifications. Autonomous AI agents pick up the work, execute independently, and deliver — while a server-side auditor verifies every commit, every build, every deliverable. No human babysitting. Full cost transparency.
 
-**Schema Intelligence Chatbot** — AI-powered knowledge network over 17,000+ MySQL database objects across 27 databases and 5 servers. Gemini 2.5 Pro summarizes every table, stored procedure, view, event, and trigger. Embeddings power semantic search via Vertex AI Vector Search. A RAG chatbot answers natural language questions about schema architecture, generates impact analysis, and produces migration plans. *Ask it "what tables store customer data?" and it searches 17,000 objects semantically.*
+This isn't a chatbot wrapper or a prompt toolkit. This is a production-grade framework with:
 
-**Serverless Data Lakehouse** — Fully serverless Apache Iceberg lakehouse on GCP. No persistent clusters — all compute is ephemeral Dataproc Serverless (pay-per-job). BigLake REST Catalog for metadata, BigQuery for SQL access, GCS for storage. Tables auto-appear in BigQuery UI. Infrastructure as code via Terraform with modular architecture.
+- **Spec-Driven Architecture** — Products, manifests, and tasks form a hierarchical build plan. Dependencies chain manifests and tasks in execution order. Agents receive the full spec as context.
+- **Autonomous Agent Execution** — The framework spawns independent Claude Code, Cursor, or any MCP-compatible agent session. Each agent runs in its own branch, commits its own code, creates its own PR.
+- **Independent Watcher Auditing** — A server-side auditor the agent cannot see, override, or bypass. Three gates: did you commit code? Does it compile? Did you address the deliverables? Fail any gate and the task is downgraded — the agent has no say.
+- **Visceral Rules** — Non-negotiable operating constraints. "Every change gets its own branch." "Daily budget is $100." "Never store data in memory only." Every agent must acknowledge these before doing any work. Violations are flagged automatically.
+- **Real-Time Cost & Efficiency Analytics** — Every dollar spent, every turn taken, every line of code written — tracked per task, per agent, per day. Productivity scoring with completion rates, first-attempt success rates, cost per task, and 7-day trends. You see exactly what autonomous development costs and produces.
+- **Shared Memory Across Sessions** — Decisions, patterns, bugs, and constraints persist. A new agent session inherits everything previous sessions learned. No more repeating yourself.
+- **Peer-to-Peer Synchronization** — Multiple machines discover each other via mDNS and sync memories, conversations, and manifests using Automerge CRDTs. Fully decentralized.
+- **16-Tab Dashboard** — Real-time monitoring: tasks, costs, productivity, compliance, conversations, memories, manifests, products, DAG visualization, watcher audits, and more.
 
----
+**19,000+ lines of Go. 40+ MCP tools. 70+ REST API endpoints. 31 SQLite tables. Single binary.**
 
-### Featured Projects
+> *This is what autonomous software development looks like — measured, audited, and cost-controlled.*
 
-#### [OpenLoom](https://github.com/k8nstantin/openloom) — AI Development Framework
+### Schema Intelligence Chatbot — AI That Understands Your Entire Database
 
-The framework for building software with autonomous AI agents. Write specs. Agents build. Watcher audits. Humans approve. Every dollar tracked.
+**17,000+ database objects across 27 databases and 5 servers — searchable by natural language.**
 
-- **Products > Manifests > Tasks** — hierarchical spec-driven development with dependency chains
-- **Autonomous Execution** — spawns independent Claude Code / Cursor sessions from specs
-- **Watcher** — server-side auditor agents cannot override (git, build, manifest compliance gates)
-- **Visceral Rules** — non-negotiable constraints every agent must follow, violations flagged automatically
-- **Shared Memory** — decisions, patterns, and context persist across all sessions and agents
-- **Peer Sync** — multiple machines discover each other via mDNS and sync via Automerge CRDTs
-- **Cost & Efficiency Tracking** — every dollar, every turn, every line of code tracked per task, per agent, per day
-- **Productivity Scoring** — real-time metrics: lines committed, completion rates, cost per task, 7-day trends
-- **Dashboard** — 16-tab UI with task monitoring, cost analytics, DAG visualization, compliance tracking
+Built an AI-powered knowledge network that ingests raw MySQL schema dumps and transforms them into a fully searchable, AI-summarized knowledge base:
 
-**Tech:** Go, SQLite, Cytoscape.js, MCP (Model Context Protocol), Automerge CRDT, mDNS
-
-#### Schema Intelligence Chatbot — AI Knowledge Network for Database Architecture
-
-17,000+ database objects made searchable by natural language.
-
-- **AI Summaries** — Gemini 2.5 Pro summarizes every table, procedure, view, event, trigger (5-10 sentences each)
-- **Semantic Search** — text-embedding-005 (768-dim) + Vertex AI Vector Search (Tree-AH)
-- **RAG Pipeline** — question + vector search + BigQuery enrichment + Gemini answer generation
-- **3 Modes** — explore (search), impact analysis (what breaks if I change X), migration planning
-- **Cloud Run API** — HTTP endpoints with IAM auth, deployed serverless
-- **Chat UI** — multi-turn conversations with annotated sources, code display, session persistence
+- **AI Summaries** — Gemini 2.5 Pro generates 5-10 sentence summaries for every table, stored procedure, view, event, and trigger — with PII detection, index analysis, and source server tracking
+- **Semantic Search** — text-embedding-005 (768-dim) with Vertex AI Vector Search enables natural language queries like "what tables store customer data?" across 17,000 objects
+- **RAG Chatbot** — Multi-turn conversational interface with 3 modes: explore (search), impact analysis (what breaks if I change X?), and migration planning
+- **Cloud Run API** — Serverless HTTP endpoints with IAM auth, production-deployed
+- **Feedback Loop** — Chat logs are re-embedded and fed back into the knowledge network, improving results over time
 
 **Tech:** Python, Gemini 2.5 Pro, Vertex AI Vector Search, BigQuery, Cloud Run, Apache Iceberg, Dataproc Serverless
 
-### Other Projects
+### Serverless Data Lakehouse — Zero Infrastructure, Full Power
 
-| Project | Description |
-|---------|-------------|
-| [mcps](https://github.com/k8nstantin/mcps) | MCP Servers for managing databases |
-| [tengo](https://github.com/k8nstantin/tengo) | Go La Tengo: MySQL automation library (fork) |
+**Fully serverless Apache Iceberg lakehouse on GCP. No persistent clusters. Pay-per-query.**
+
+Designed and deployed a complete data lakehouse with zero standing infrastructure:
+
+- **Ephemeral Compute** — All Spark/PySpark jobs run on Dataproc Serverless. Cluster spins up, runs, shuts down. No cluster management.
+- **BigLake REST Catalog** — Iceberg metadata via BigQuery federation. Tables auto-appear in BigQuery UI as datasets.
+- **Infrastructure as Code** — Modular Terraform with independently rebuildable components (Superset, Doris, Vertex AI, Vector Search)
+- **Cost-Optimized** — Full knowledge network rebuild costs ~$30-35. No idle compute costs.
 
 ---
 
-### Expertise
+## Expertise
 
-**AI/Agents:** Autonomous agent orchestration, LLM integration (Claude, Gemini, GPT-4), RAG pipelines, vector search, embeddings, MCP protocol, agent compliance and auditing
+**AI & Agents:** Autonomous agent orchestration, LLM integration (Claude, Gemini, GPT-4), RAG pipelines, vector search, embeddings, MCP protocol, agent compliance and auditing, cost optimization
 
-**Data:** MySQL, MariaDB, PostgreSQL, Apache Iceberg, BigQuery, Spark, Kafka CDC, Vector Search, schema intelligence
+**Data Platforms:** MySQL, MariaDB, PostgreSQL, Apache Iceberg, BigQuery, Spark, Kafka CDC, Vector Search, schema intelligence, data lakehouse architecture
 
-**Cloud:** GCP (Dataproc Serverless, BigLake, Vertex AI, Cloud Run, Vector Search), Terraform, serverless architecture
+**Cloud & Infrastructure:** GCP (Dataproc Serverless, BigLake, Vertex AI, Cloud Run, Vector Search), Terraform, serverless architecture, peer-to-peer systems, CRDT synchronization
 
 **Languages:** Go, Python, SQL, JavaScript, Rust
 
-**Infrastructure:** Data lakehouse design, high availability, peer-to-peer systems, CRDT synchronization
-
-### Publications & Community
+## Publications & Community
 
 - Published comparative analyses of MySQL/MariaDB solutions and high-availability systems
 - Organizer of **The Silicon Valley MySQL Meetup**
-- Active contributor to chaos engineering, data compliance, and distributed systems architecture
+- Active thought leader in chaos engineering, data compliance, and distributed systems architecture
 
-### Connect
+## Connect
 
-- [LinkedIn](https://www.linkedin.com/in/constantin-alexander/)
+- [LinkedIn](https://www.linkedin.com/in/constantin-alexander/) (30K+ followers)
 - [dedomena.io](https://dedomena.io)
 - Languages: English, Russian, Spanish
+
+---
+
+*Building the future where AI agents don't assist developers — they are the developers. Humans architect, specify, and approve. Machines build, test, and deliver.*
