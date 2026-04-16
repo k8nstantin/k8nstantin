@@ -1,18 +1,18 @@
 # Constantin Alexander
 
-**[OpenLoom](https://github.com/k8nstantin/openloom)** | **[LinkedIn](https://www.linkedin.com/in/constantin-alexander/)** (30K+) | **[dedomena.io](https://dedomena.io)**
+**[OpenPraxis](https://github.com/k8nstantin/openpraxis)** | **[LinkedIn](https://www.linkedin.com/in/constantin-alexander/)** (30K+) | **[dedomena.io](https://dedomena.io)**
 
 ---
 
-AI expert specializing in **autonomous agent governance**, **deployment control**, and **AI-powered data intelligence**. Creator of OpenLoom. Builder of production AI systems that give organizations real control over how AI agents work, what they cost, and what they produce.
+AI expert specializing in **autonomous agent governance**, **deployment control**, and **AI-powered data intelligence**. Creator of OpenPraxis. Builder of production AI systems that give organizations real control over how AI agents work, what they cost, and what they produce.
 
 ---
 
-## OpenLoom — AI Agent Governance & Development Framework
+## OpenPraxis — AI Agent Governance & Development Framework
 
-**[github.com/k8nstantin/openloom](https://github.com/k8nstantin/openloom)**
+**[github.com/k8nstantin/openpraxis](https://github.com/k8nstantin/openpraxis)**
 
-The core problem: AI coding agents are powerful but ungovernable. They hallucinate completion, deviate from instructions, start every session from zero, and give you no visibility into cost, quality, or compliance. OpenLoom fixes this with a **Spec-Driven Development** framework:
+The core problem: AI coding agents are powerful but ungovernable. They hallucinate completion, deviate from instructions, start every session from zero, and give you no visibility into cost, quality, or compliance. OpenPraxis fixes this with a **Spec-Driven Development** framework:
 
 - **Agent Governance** — Visceral rules are non-negotiable constraints agents must acknowledge before starting. Violations detected and flagged automatically. You set the rules once, every agent follows them.
 - **Deployment Control** — Products break into specs (manifests) with dependency chains. Tasks execute sequentially. Agents spawn autonomously into their own branches, commit, push, PR.
@@ -40,7 +40,7 @@ The full pipeline — parsing, AI summarization, embedding, knowledge graph, cat
 
 All of the AI work above is built on decades of hands-on database and infrastructure engineering:
 
-**Gryphon AI** — Lead Data Architect. Serverless Apache Iceberg lakehouse on GCP (BigLake, BigQuery, Dataproc Serverless, Apache Doris, Terraform). Schema intelligence chatbot. OpenLoom.
+**Gryphon AI** — Lead Data Architect. Serverless Apache Iceberg lakehouse on GCP (BigLake, BigQuery, Dataproc Serverless, Apache Doris, Terraform). Schema intelligence chatbot. OpenPraxis.
 
 **ProxySQL** — MySQL/PostgreSQL connection pooling, query routing, and caching at scale.
 
