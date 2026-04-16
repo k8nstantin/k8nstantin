@@ -1,5 +1,3 @@
-<img src="https://media.licdn.com/dms/image/v2/D5603AQFORIuUPVrBDA/profile-displayphoto-shrink_400_400/B56ZkwWkd3HQAY-/0/1757452847594?e=2147483647&v=beta&t=1bwqut9Z8OUdfBUYPNg9fAbjeFLofDLfePn-2G2AtsA" width="150" align="right" style="border-radius:50%;margin-left:20px" />
-
 # Constantin Alexander
 
 What happens when you stop asking AI to help you code — and start giving it the entire job?
@@ -11,6 +9,10 @@ So I built [OpenLoom](https://github.com/k8nstantin/openloom) — a framework wh
 Every conversation is recorded. Every tool call captured. Every dollar tracked. You can see exactly what each agent did, what it cost, and whether it followed the rules.
 
 It's early. It's messy. And it's the most exciting thing I've ever worked on.
+
+> *"Constantin is the data whisperer! Everything started looking up and information became both accessible and reliable."*
+
+> *"Exceptionally technically skilled with great manager/architect potential."*
 
 ---
 
@@ -50,21 +52,27 @@ Designed and deployed a fully serverless Apache Iceberg lakehouse on GCP. No per
 
 ---
 
-## The Short Version
+## 20 Years, 7 Cities
 
-I've been building data systems since before most people knew what a data lake was. MySQL replication, MariaDB migrations, high-availability architectures, performance tuning, disaster recovery — I've done it all at enterprise scale.
+I've built data systems at enterprise scale across Miami, Los Angeles, San Francisco, New York, Boston, Las Vegas, and Carlsbad. Telecom, finance, healthcare, SaaS — different industries, same obsession: making data reliable, fast, and accessible.
 
-Now I'm applying all of that experience to the next frontier: making AI agents productive, accountable, and cost-efficient software developers. Not as assistants. As autonomous builders that follow specs, follow rules, and get audited by machines.
+Currently at **Gryphon AI** in Miami, where I designed the serverless data lakehouse, built the schema intelligence chatbot, and created OpenLoom.
 
-If you need someone who can architect your data platform **and** lead your AI enablement — with the hands-on credibility of having built both from scratch — let's talk.
+**City University of Seattle** (1993-1997) | Becker CPA Academic Achievement (1996)
+
+## What I Can Help With
+
+IT consulting, database development, application development, data recovery, team building, leadership development, change management, digital marketing strategy, and brand marketing.
+
+Or if you're trying to figure out how to make AI agents actually productive in your engineering org — that's where things get interesting.
 
 ## Published Work
 
 | Article | Likes |
 |---------|-------|
 | [MySQL and MariaDB so similar, alas so different](https://www.linkedin.com/pulse/mysql-mariadb-so-similar-alas-different-constantin-alexander--ifu9e) | 71 |
-| [Easy PostgreSQL Backup Strategies: Complete Guide](https://www.linkedin.com/pulse/easy-postgresql-backup-strategies-complete-guide-constantin-alexander-uvlye) | 48 |
 | [PostgreSQL Physical Replication, Easy Guide](https://www.linkedin.com/pulse/postgresql-physical-replication-easy-guide-constantin-alexander-sh5ie) | 49 |
+| [Easy PostgreSQL Backup Strategies: Complete Guide](https://www.linkedin.com/pulse/easy-postgresql-backup-strategies-complete-guide-constantin-alexander-uvlye) | 48 |
 | [PostgreSQL Logical Replication](https://www.linkedin.com/pulse/postgresql-logical-replication-constantin-alexander-hzlae) | 42 |
 | [Easy PostgreSQL Patroni Integration](https://www.linkedin.com/pulse/easy-postgresql-patroni-intergration-constantin-alexander-tc8je) | 35 |
 | [PostgreSQL and Apache Flink CDC Integration](https://www.linkedin.com/pulse/postgresql-apache-flink-cdc-integration-constantin-alexander--qhnle) | 24 |
@@ -77,8 +85,8 @@ If you need someone who can architect your data platform **and** lead your AI en
 
 ## Community
 
-Organizer of **The Silicon Valley MySQL Meetup**. 30K+ followers on LinkedIn. Published author on database architecture and distributed systems.
+Organizer of **The Silicon Valley MySQL Meetup**. 30K+ followers on [LinkedIn](https://www.linkedin.com/in/constantin-alexander/). Published author on database architecture and distributed systems.
 
 ## Connect
 
-[LinkedIn](https://www.linkedin.com/in/constantin-alexander/) | [dedomena.io](https://dedomena.io) | English, Russian, Spanish
+[LinkedIn](https://www.linkedin.com/in/constantin-alexander/) | [dedomena.io](https://dedomena.io) | English, Russian, Spanish (all native)
