@@ -1,3 +1,5 @@
+<img src="https://media.licdn.com/dms/image/v2/D5603AQFORIuUPVrBDA/profile-displayphoto-shrink_400_400/B56ZkwWkd3HQAY-/0/1757452847594?e=2147483647&v=beta&t=1bwqut9Z8OUdfBUYPNg9fAbjeFLofDLfePn-2G2AtsA" width="150" align="right" style="border-radius:50%;margin-left:20px" />
+
 # Constantin Alexander
 
 I've spent 20+ years building data systems that power enterprises — MySQL fleets, MariaDB migrations, Spark pipelines, serverless lakehouses on GCP. I've done the hard infrastructure work at companies across Miami, LA, San Francisco, New York, and Boston.
@@ -6,7 +8,7 @@ But here's what I'm doing now that matters most: I'm building the framework that
 
 Not using Copilot to autocomplete lines. Not chatting with Claude for code suggestions. I built a full development platform where you write a spec, and AI agents pick it up, create a branch, write the code, commit it, push it, create a PR — and then a server-side auditor they can't see or override checks every commit, verifies the build passes, and confirms the deliverables were addressed. If any gate fails, the agent's work is rejected. No human babysitting required.
 
-And every dollar spent, every turn taken, every line of code written is tracked. You know exactly what autonomous development costs and what it produces.
+Every dollar spent, every turn taken, every line of code written is tracked. Every conversation with every agent is recorded. Every tool call, every file edit, every git operation — captured and searchable. You know exactly what autonomous development costs, what it produces, and how every decision was made.
 
 That's [OpenLoom](https://github.com/k8nstantin/openloom).
 
