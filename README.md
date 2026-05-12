@@ -1,6 +1,6 @@
 # Constantin Alexander
 
-**[OpenPraxis](https://github.com/k8nstantin/openpraxis)** | **[LinkedIn](https://www.linkedin.com/in/constantin-alexander/)** (30K+) | **[dedomena.io](https://dedomena.io)**
+**[OpenPraxis](https://github.com/k8nstantin/OpenPraxis)** | **[LinkedIn](https://www.linkedin.com/in/constantin-alexander/)** (30K+) | **[dedomena.io](https://dedomena.io)**
 
 ---
 
@@ -8,19 +8,68 @@ AI expert specializing in **autonomous agent governance**, **deployment control*
 
 ---
 
-## OpenPraxis — AI Agent Governance & Development Framework
+## Currently Building
 
-**[github.com/k8nstantin/openpraxis](https://github.com/k8nstantin/openpraxis)**
+### [OpenPraxis](https://github.com/k8nstantin/OpenPraxis) — Autonomous Agent Workflow Engine
 
-The core problem: AI coding agents are powerful but ungovernable. They hallucinate completion, deviate from instructions, start every session from zero, and give you no visibility into cost, quality, or compliance. OpenPraxis fixes this with a **Spec-Driven Development** framework:
+A peer-to-peer workflow engine for autonomous coding agents. Single Go binary: MCP server + HTTP dashboard + mDNS peer discovery + Automerge CRDT sync. Products break into specs (manifests) with task DAGs. Agents execute tasks sequentially in isolated git worktrees, commit, push, open PRs — autonomously. Full cost, quality, and compliance visibility.
 
-- **Agent Governance** — Visceral rules are non-negotiable constraints agents must acknowledge before starting. Violations detected and flagged automatically. You set the rules once, every agent follows them.
-- **Deployment Control** — Products break into specs (manifests) with dependency chains. Tasks execute sequentially. Agents spawn autonomously into their own branches, commit, push, PR.
-- **Independent Auditing** — A server-side watcher the agent can't see or bypass checks every task: code committed? builds? deliverables addressed? Agents don't grade themselves.
-- **Full Cost & Productivity Tracking** — Every dollar, turn, line of code tracked per task, per agent, per day. Productivity scoring, completion rates, first-attempt success, 7-day trends.
-- **Persistent Memory** — Decisions, bugs, patterns carry across sessions and agents. New sessions inherit everything. Multiple machines sync peer-to-peer via Automerge CRDTs.
+**What makes it different:** Agents don't self-govern. OpenPraxis enforces visceral rules the agent cannot override, runs an independent server-side audit the agent cannot see, tracks every dollar and turn, and persists memory across sessions and machines.
 
-19,000+ lines of Go. 40+ MCP tools. 70+ API endpoints. 16-tab dashboard. Single binary.
+19,000+ lines of Go · 40+ MCP tools · 70+ API endpoints · 16-tab dashboard · Single binary
+
+→ The engine that builds everything below.
+
+---
+
+### [go-leiden](https://github.com/k8nstantin/go-leiden) — First Native Go Leiden Algorithm
+
+**The first and only Go implementation of the Leiden community detection algorithm.** Zero external dependencies. Port of [graspologic-native](https://github.com/graspologic-org/graspologic-native) (Microsoft Research, MIT) — the same Rust implementation used in production by Microsoft GraphRAG.
+
+The Go ecosystem has Louvain (`gonum/graph/community`). It has no Leiden. Leiden fixes Louvain's fundamental flaw: it guarantees well-connected communities where Louvain cannot.
+
+**How it's built:** Entirely by autonomous AI agents on OpenPraxis. No human code commits. Five manifests, five tasks, sequential execution chain. Every task gets a cascading prompt: product context → manifest context → implementation spec → coding standards. The [Trace-Grounded Feedback Loop](https://github.com/k8nstantin/OpenPraxis) auto-improves prompts when tasks fail — agents learn from their own failures.
+
+```
+M1: Core data structures (CompactNetwork, Clustering, Edge)
+  ↓
+M2: Algorithm phases (local-move, refinement, aggregation)
+  ↓
+M3: Quality functions (Modularity, CPM)
+  ↓
+M4: Public API (Leiden, HierarchicalLeiden, go.mod)
+  ↓
+M5: Tests, benchmarks, fuzz
+```
+
+This is the case study: **can autonomous agents build a production-quality open-source Go library from algorithm spec to published package without human code commits?**
+
+→ [go-leiden on GitHub](https://github.com/k8nstantin/go-leiden) · [Build process & prompts](https://github.com/k8nstantin/go-leiden/tree/main/docs)
+
+---
+
+### [KungFu](https://github.com/k8nstantin/kungfu) — Next-Generation Version Control for AI Agents
+
+Git was built for humans working sequentially. KungFu is built for AI agents working concurrently. CRDT-based version control (Loro library) where agents stream fine-grained mutations that merge automatically — no branches, no merge conflicts, no sequential commits. Every mutation is signed with Ed25519. The "Ghost State" concept isolates agent work mathematically until it's ready to expose.
+
+Built in Rust. Exposes an MCP server so AI coding agents interact with it natively. Designed to replace Git for high-concurrency agentic workflows.
+
+→ [KungFu on GitHub](https://github.com/k8nstantin/kungfu)
+
+---
+
+## OpenPraxis — Deep Dive
+
+**The core problem:** AI coding agents are powerful but ungovernable. They hallucinate completion, deviate from instructions, start every session from zero, and give you no visibility into cost, quality, or compliance.
+
+**OpenPraxis fixes this:**
+
+- **Visceral Rules** — Non-negotiable constraints agents must acknowledge before starting. Violations detected and flagged automatically. You set the rules once, every agent follows them.
+- **Product DAGs** — Products → Manifests → Tasks with `owns` and `depends_on` edges in a relationship table. Tasks execute in dependency order. Agents spawn autonomously into isolated git worktrees.
+- **Trace-Grounded Feedback Loop** — Every agent run sees its own execution history. Pass rates tracked per task and manifest. Autonomous proposer fires on failure streaks and improves prompts without intervention.
+- **Independent Auditing** — Server-side watcher the agent cannot see or bypass checks every task: committed? builds? deliverables addressed?
+- **Full Cost & Productivity Tracking** — Every dollar, turn, line of code tracked per task, agent, day.
+- **Persistent Memory** — Decisions, patterns, bugs carry across sessions and machines. Peer-to-peer sync via Automerge CRDTs.
 
 ---
 
@@ -28,17 +77,15 @@ The core problem: AI coding agents are powerful but ungovernable. They hallucina
 
 At **Gryphon AI**, built an AI knowledge network that lets you **search 17,000+ database objects by natural language**.
 
-17,000+ tables, stored procedures, views, events, and triggers across 27 databases and 5 servers — each one summarized by Gemini 2.5 Pro with PII detection and index analysis. Embedded with text-embedding-005 and indexed in Vertex AI Vector Search.
+17,000+ tables, stored procedures, views, events, and triggers across 27 databases and 5 servers — each summarized by Gemini 2.5 Pro with PII detection and index analysis. Embedded with text-embedding-005 and indexed in Vertex AI Vector Search.
 
-Ask "what tables handle customer billing?" and it searches every object semantically, enriches from BigQuery, and answers with source citations. Three modes: **explore** (search anything), **impact analysis** (what breaks if I change this?), **migration planning** (generate a plan for moving this system). Multi-turn chat with session persistence. Deployed serverless on Cloud Run.
+Ask "what tables handle customer billing?" and it searches every object semantically, enriches from BigQuery, and answers with source citations. Three modes: **explore**, **impact analysis**, **migration planning**. Multi-turn chat with session persistence. Deployed serverless on Cloud Run.
 
-The full pipeline — parsing, AI summarization, embedding, knowledge graph, categorization — runs as a single atomic Dataproc Serverless job. Rebuilds for ~$30.
+Full pipeline — parsing, AI summarization, embedding, knowledge graph, categorization — runs as a single atomic Dataproc Serverless job. Rebuilds for ~$30.
 
 ---
 
 ## Data Platform Experience
-
-All of the AI work above is built on decades of hands-on database and infrastructure engineering:
 
 **Gryphon AI** — Lead Data Architect. Serverless Apache Iceberg lakehouse on GCP (BigLake, BigQuery, Dataproc Serverless, Apache Doris, Terraform). Schema intelligence chatbot. OpenPraxis.
 
@@ -72,15 +119,15 @@ All of the AI work above is built on decades of hands-on database and infrastruc
 
 **Xerox Global Services** — Oracle Applications 11i, Data Guard, ERP management.
 
-**24 Hour Fitness** — Oracle Applications, PeopleSoft. SOX compliance. Led applications support.
+**24 Hour Fitness** — Oracle Applications, PeopleSoft. SOX compliance.
 
 **GE** — Server consolidation. Oracle Financials.
 
 **Texas Instruments** — Oracle Applications ERP deployment.
 
-**Oracle Corporation** — Managing/Principal Consultant. Applications architecture. Team of six.
+**Oracle Corporation** — Managing/Principal Consultant. Applications architecture.
 
-**JBS Corporation** — Principal Consultant. ERP implementations. Team of five. 6 years.
+**JBS Corporation** — Principal Consultant. ERP implementations.
 
 ---
 
