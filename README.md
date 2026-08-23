@@ -1,75 +1,89 @@
 # Constantin Alexander
 
-**[OpenPraxis](https://github.com/k8nstantin/OpenPraxis)** | **[go-leiden](https://github.com/k8nstantin/go-leiden)** | **[KungFu](https://github.com/k8nstantin/kungfu)** | **[LinkedIn](https://www.linkedin.com/in/constantin-alexander/)** (30K+) | **[dedomena.io](https://dedomena.io)**
+**[SuperX](https://github.com/k8nstantin/superx)** · **[swindex](https://swindex.ai)** · **[KungFu](https://github.com/k8nstantin/kungfu)** · **[go-leiden](https://github.com/k8nstantin/go-leiden)** · **[LinkedIn](https://www.linkedin.com/in/constantin-alexander/)** (30K+) · **[dedomena.io](https://dedomena.io)**
 
 ---
 
-AI expert specializing in **autonomous agent governance**, **deployment control**, and **AI-powered data intelligence**. Creator of OpenPraxis. Builder of production AI systems that give organizations real control over how AI agents work, what they cost, and what they produce.
+I build the layer underneath autonomous agents: the operating system that governs them, and the graph index that makes their memory navigable. Twenty-five years of data architecture — Oracle, Apple, Walmart, ProxySQL, Iceberg lakehouses — now pointed at the problem of making AI agents accountable, durable, and directable.
 
 ---
 
-## Currently Building
+## The thesis
 
-### [OpenPraxis](https://github.com/k8nstantin/OpenPraxis) — Autonomous Agent Workflow Engine
+**Agents are powerful and ungovernable.** They forget everything between sessions, hallucinate completion, drift from instructions, and give you no honest account of what they did or what it cost. The fix is not a better prompt — it is an operating system: capture everything they emit, model the work as a graph, schedule that graph, dispatch agents against it, and write the results back where the next agent will find them. Every fact an insert, nothing overwritten, all of it queryable.
 
-A peer-to-peer workflow engine for autonomous coding agents. Single Go binary: MCP server + HTTP dashboard + mDNS peer discovery + Automerge CRDT sync. Products break into specs (manifests) with task DAGs. Agents execute tasks sequentially in isolated git worktrees, commit, push, open PRs — autonomously. Full cost, quality, and compliance visibility.
+**Graphs at scale are the other half.** Once the substrate remembers everything, the question becomes "what is related to this, three hops out, right now" — and that question is where property graphs fall over. So I built the index for it separately: hierarchical communities plus hub-routed traversal, answering multi-hop queries in microseconds without moving your data.
 
-**What makes it different:** Agents don't self-govern. OpenPraxis enforces visceral rules the agent cannot override, runs an independent server-side audit the agent cannot see, tracks every dollar and turn, and persists memory across sessions and machines.
-
-19,000+ lines of Go · 40+ MCP tools · 70+ API endpoints · 16-tab dashboard · Single binary
-
-→ The engine that builds everything below.
+One system remembers and directs. The other makes the memory navigable. Both are Rust, both are open.
 
 ---
 
-### [go-leiden](https://github.com/k8nstantin/go-leiden) — First Native Go Leiden Algorithm
+## Currently building
 
-**The first and only Go implementation of the Leiden community detection algorithm.** Zero external dependencies. Port of [graspologic-native](https://github.com/graspologic-org/graspologic-native) (Microsoft Research, MIT) — the same Rust implementation used in production by Microsoft GraphRAG.
+### [SuperX](https://github.com/k8nstantin/superx) — the agentic OS
 
-The Go ecosystem has Louvain (`gonum/graph/community`). It has no Leiden. Leiden fixes Louvain's fundamental flaw: it guarantees well-connected communities where Louvain cannot.
+**[k8nstantin.github.io/superx](https://k8nstantin.github.io/superx/)** · Rust + SurrealDB · v1.1.0 · Apache-2.0
 
-**How it's built:** Entirely by autonomous AI agents on OpenPraxis. No human code commits. Five manifests, five tasks, sequential execution chain. Every task gets a cascading prompt: product context → manifest context → implementation spec → coding standards. The [Trace-Grounded Feedback Loop](https://github.com/k8nstantin/OpenPraxis) auto-improves prompts when tasks fail — agents learn from their own failures.
+Your coding agents already run all day. SuperX captures every one of them — full conversations, tool calls, token usage, history backfilled and then tailed live — with no agent-side configuration to install. Then it puts them to work.
 
-```
-M1: Core data structures (CompactNetwork, Clustering, Edge)
-  ↓
-M2: Algorithm phases (local-move, refinement, aggregation)
-  ↓
-M3: Quality functions (Modularity, CPM)
-  ↓
-M4: Public API (Leiden, HierarchicalLeiden, go.mod)
-  ↓
-M5: Tests, benchmarks, fuzz
-```
+![The SuperX dashboard](https://raw.githubusercontent.com/k8nstantin/superx/main/superx-mod-website/img/dashboard.png)
 
-This is the case study: **can autonomous agents build a production-quality open-source Go library from algorithm spec to published package without human code commits?**
+**The loop:** capture everything → model the work as a graph → schedule the graph → agents execute it → results land back in the graph.
 
-→ [go-leiden on GitHub](https://github.com/k8nstantin/go-leiden) · [Build process & prompts](https://github.com/k8nstantin/go-leiden/tree/main/docs)
+- **Total capture.** Claude Code, Gemini CLI and Claude Desktop, read straight from their transcripts. Sessions identified `agent/uuid7`, the raw transcript line kept beside every message, cursor checkpoints so nothing is lost across restarts. On the machine this was written on: 46k events and 19k messages across 28 sessions.
+- **The product graph.** Typed entities as nodes — product, task, rag, model, document, text, repo, credential, 18 kinds seeded and extensible at runtime — joined by native graph edges. Long-form text is itself a node linked by role edges, so every description, instruction and comment carries its own version history. Files attach as document nodes.
+- **The runner.** A schedule row says only "at this time, kick this entity"; everything else already lives in the graph. It layers tasks over their `depends_on` edges and dispatches waves — independent work in parallel, dependants after their dependencies succeed. Each task spawns an agent with a prompt assembled from its instructions and its neighbourhood; output writes back as a `produced` node. Every run pins the exact instruction version it dispatched with, and the graph is re-read at every wave — so editing it mid-run steers everything not yet dispatched.
+- **Modules all the way down.** The kernel does capture and the substrate; everything else is a module with its own database and service account, its own directory, log, CLI namespace, parameters, uuid7 identity and optionally its own UI — enable or disable them on a live OS.
+
+![A SuperX product graph](https://raw.githubusercontent.com/k8nstantin/superx/main/superx-mod-website/img/graph.png)
+
+**Design commitments:** append-only SCD-2 throughout — updates insert versions, unlinks insert retractions, cancels append rows, and "current" is computed rather than stored. Time-ordered UUIDv7 everywhere, so the substrate is its own historical log. No hardcoded policy: every tunable is a substrate parameter, and the agent executor has no default at all — until you set it, dispatch refuses loudly.
+
+### [swindex](https://github.com/k8nstantin/swindex) — hierarchical small-world graph index
+
+**[swindex.ai](https://swindex.ai)** · Rust · v0.1.0 · 142 tests
+
+Multi-hop property-graph queries in microseconds. swindex builds and persists a layered structure over your graph — Leiden communities, then a hub graph over them — and answers "what is related to X" by routing through hubs the way HNSW routes through vectors, instead of walking edges.
+
+**It is an index, not a database.** Your data stays wherever it already lives — MySQL, Postgres, Iceberg, Parquet, Arrow, an HTTP API — and swindex sits alongside as a sidecar that narrows a multi-hop question to a small bounded set of UUIDv7 ids. Your application then goes back to its own store for the rows. Persistence is Fjall; the design target and the measured numbers are both published in the repo rather than implied.
+
+### [KungFu](https://github.com/k8nstantin/kungfu) — agent-native version control
+
+Rust · Loro CRDTs
+
+Git assumes humans working sequentially; agents work concurrently, and the merge tax is paid in branch graveyards. KungFu drops branches entirely: agents splice fine-grained mutations into one stream and CRDTs merge them, every mutation signed with Ed25519, with "Ghost State" isolating an agent's work mathematically until it is ready to be seen. Exposes an MCP server so agents use it natively.
+
+### [go-leiden](https://github.com/k8nstantin/go-leiden) — the first native Go Leiden
+
+Go · zero dependencies
+
+The Go ecosystem had Louvain and no Leiden. This is a clean-room port of [graspologic-native](https://github.com/graspologic-org/graspologic-native) (Microsoft Research), the same implementation behind Microsoft GraphRAG — Leiden guarantees the well-connected communities Louvain cannot.
+
+It is also the case study: **written end to end by autonomous agents, with no human code commits**, driven by OpenPraxis through five manifests of chained tasks, each with a cascading prompt and a feedback loop that rewrote its own scaffold when tasks failed.
+
+### [Alan](https://github.com/k8nstantin/writing-system-for-ai) — a universal writing system for the age of AI
+
+**[Live prototype](https://k8nstantin.github.io/writing-system-for-ai/)**
+
+Meaning leaks at every hand-off: human to model, model to RAG, agent to agent. Natural language is too loose and code is too low-level, so nothing carries pure intent across the loop. Alan is a spatial-geometric notation where one meaning has exactly one written form — Leibniz's *characteristica universalis*, attempted now that there is finally both a need and an engine for it.
+
+### [mcps](https://github.com/k8nstantin/mcps) — MCP servers for databases
+
+Model Context Protocol servers that let agents manage real databases directly.
 
 ---
 
-### [KungFu](https://github.com/k8nstantin/kungfu) — Next-Generation Version Control for AI Agents
+## [OpenPraxis](https://github.com/k8nstantin/OpenPraxis) — the predecessor to SuperX
 
-Git was built for humans working sequentially. KungFu is built for AI agents working concurrently. CRDT-based version control (Loro library) where agents stream fine-grained mutations that merge automatically — no branches, no merge conflicts, no sequential commits. Every mutation is signed with Ed25519. The "Ghost State" concept isolates agent work mathematically until it's ready to expose.
+Go · 19k+ lines · superseded, kept public as prior art
 
-Built in Rust. Exposes an MCP server so AI coding agents interact with it natively. Designed to replace Git for high-concurrency agentic workflows.
+OpenPraxis was the first attempt at the same thesis: a spec-driven platform where products decompose into manifests and task DAGs, and agents execute them in isolated git worktrees, commit, push and open PRs autonomously. A single Go binary with an MCP server, an HTTP dashboard, mDNS peer discovery and Automerge CRDT sync.
 
-→ [KungFu on GitHub](https://github.com/k8nstantin/kungfu)
+**What it proved:** agents cannot be trusted to self-govern, and the fix is structural. Rules the agent must acknowledge and cannot override. An audit it cannot see or skip. Every dollar and turn attributed to the spec that caused it. Memory that survives the session. Products as graphs rather than tickets.
 
----
+**What it taught me, and what SuperX does differently:** one node table and one edge table with kinds as data, instead of five entity tables that had to be collapsed later. Lifecycle derived from an append-only event log rather than a status column that drifts. A verdict as typed data rather than free text. The instruction stream — not a template table — as the surface where prompts actually evolve. And insert-only as a hard rule, so that history cannot be destroyed by a migration.
 
-## OpenPraxis — Deep Dive
-
-**The core problem:** AI coding agents are powerful but ungovernable. They hallucinate completion, deviate from instructions, start every session from zero, and give you no visibility into cost, quality, or compliance.
-
-**OpenPraxis fixes this:**
-
-- **Visceral Rules** — Non-negotiable constraints agents must acknowledge before starting. Violations detected and flagged automatically. You set the rules once, every agent follows them.
-- **Product DAGs** — Products → Manifests → Tasks with `owns` and `depends_on` edges in a relationship table. Tasks execute in dependency order. Agents spawn autonomously into isolated git worktrees.
-- **Trace-Grounded Feedback Loop** — Every agent run sees its own execution history. Pass rates tracked per task and manifest. Autonomous proposer fires on failure streaks and improves prompts without intervention.
-- **Independent Auditing** — Server-side watcher the agent cannot see or bypass checks every task: committed? builds? deliverables addressed?
-- **Full Cost & Productivity Tracking** — Every dollar, turn, line of code tracked per task, agent, day.
-- **Persistent Memory** — Decisions, patterns, bugs carry across sessions and machines. Peer-to-peer sync via Automerge CRDTs.
+SuperX is that rewrite, in Rust, on an append-only substrate.
 
 ---
 
