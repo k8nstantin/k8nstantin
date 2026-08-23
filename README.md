@@ -4,17 +4,9 @@
 
 ---
 
-I build the layer underneath autonomous agents: the operating system that governs them, and the graph index that makes their memory navigable. Twenty-five years of data architecture — Oracle, Apple, Walmart, ProxySQL, Iceberg lakehouses — now pointed at the problem of making AI agents accountable, durable, and directable.
+Database and distributed-systems architecture — MySQL/PostgreSQL at scale, replication and HA, CDC pipelines, Iceberg lakehouses on GCP — currently applied to agent infrastructure. Two Rust systems: an append-only operating system for autonomous coding agents, and a hierarchical index that answers multi-hop property-graph queries without moving the underlying data.
 
----
-
-## The thesis
-
-**Agents are powerful and ungovernable.** They forget everything between sessions, hallucinate completion, drift from instructions, and give you no honest account of what they did or what it cost. The fix is not a better prompt — it is an operating system: capture everything they emit, model the work as a graph, schedule that graph, dispatch agents against it, and write the results back where the next agent will find them. Every fact an insert, nothing overwritten, all of it queryable.
-
-**Graphs at scale are the other half.** Once the substrate remembers everything, the question becomes "what is related to this, three hops out, right now" — and that question is where property graphs fall over. So I built the index for it separately: hierarchical communities plus hub-routed traversal, answering multi-hop queries in microseconds without moving your data.
-
-One system remembers and directs. The other makes the memory navigable. Both are Rust, both are open.
+All of it is open and built in public — Apache-2.0 for SuperX, BSL 1.1 for swindex, MIT/Apache for the libraries. If you work on agent infrastructure, graph indexing or CRDTs, [**Where to start**](#where-to-start) lists the specific pieces that are open right now.
 
 ---
 
@@ -22,66 +14,87 @@ One system remembers and directs. The other makes the memory navigable. Both are
 
 ### [SuperX](https://github.com/k8nstantin/superx) — the agentic OS
 
-**[k8nstantin.github.io/superx](https://k8nstantin.github.io/superx/)** · Rust + SurrealDB · v1.1.0 · Apache-2.0
+**[k8nstantin.github.io/superx](https://k8nstantin.github.io/superx/)** · Rust · SurrealDB · v1.1.0 · Apache-2.0
 
-Your coding agents already run all day. SuperX captures every one of them — full conversations, tool calls, token usage, history backfilled and then tailed live — with no agent-side configuration to install. Then it puts them to work.
+An operating system for the coding agents already running on your machine: it captures everything they emit, models the work they should do as a graph, schedules that graph, dispatches agents against it, and writes the results back into the same substrate.
 
 ![The SuperX dashboard](https://raw.githubusercontent.com/k8nstantin/superx/main/superx-mod-website/img/dashboard.png)
 
-**The loop:** capture everything → model the work as a graph → schedule the graph → agents execute it → results land back in the graph.
+**Substrate.** SurrealDB, insert-only. A node is an immutable UUIDv7 anchor row plus an SCD-2 chain of state rows; "current" is the newest row in the chain, computed at read time, never a mutated column. Edges are a native `TYPE RELATION … ENFORCED` table written by `RELATE`, so traversal follows record pointers and costs a node's degree rather than the size of the edge history; unlinking appends a retraction row on the same edge chain instead of deleting. The kernel's service account issues only `SELECT` and `CREATE` — there is no verb in the codebase that can `UPDATE` or `DELETE`, which is what makes the audit trail structural rather than aspirational.
 
-- **Total capture.** Claude Code, Gemini CLI and Claude Desktop, read straight from their transcripts. Sessions identified `agent/uuid7`, the raw transcript line kept beside every message, cursor checkpoints so nothing is lost across restarts. On the machine this was written on: 46k events and 19k messages across 28 sessions.
-- **The product graph.** Typed entities as nodes — product, task, rag, model, document, text, repo, credential, 18 kinds seeded and extensible at runtime — joined by native graph edges. Long-form text is itself a node linked by role edges, so every description, instruction and comment carries its own version history. Files attach as document nodes.
-- **The runner.** A schedule row says only "at this time, kick this entity"; everything else already lives in the graph. It layers tasks over their `depends_on` edges and dispatches waves — independent work in parallel, dependants after their dependencies succeed. Each task spawns an agent with a prompt assembled from its instructions and its neighbourhood; output writes back as a `produced` node. Every run pins the exact instruction version it dispatched with, and the graph is re-read at every wave — so editing it mid-run steers everything not yet dispatched.
-- **Modules all the way down.** The kernel does capture and the substrate; everything else is a module with its own database and service account, its own directory, log, CLI namespace, parameters, uuid7 identity and optionally its own UI — enable or disable them on a live OS.
+**Capture.** Per-agent adapters tail the transcript files that Claude Code, Gemini CLI and Claude Desktop already write — no hooks, no agent-side configuration, nothing to install into their settings. History is backfilled on first contact, then followed live from per-file byte-offset cursors so a restart resumes exactly where it stopped. Parsing is deliberately tolerant: recognized lines become typed `message` rows with the raw JSON retained alongside, and anything unrecognized still lands as telemetry rather than being dropped. Sessions are identified `agent/uuid7`; token usage, tool calls and context pressure are read from the transcripts rather than estimated.
+
+**The graph.** Eighteen node and edge kinds seeded and extensible at runtime — `product`, `task`, `rag`, `model`, `document`, `text`, `repo`, `credential`, joined by `contains`, `depends_on`, `consults`, `describes`, `instructs`, `produced`, `attached`. Kinds are rows in a registry table, not a Rust enum, so adding one is a command rather than a release. Long-form text is itself a node linked by a role edge, which means a description or a set of instructions has its own version chain independent of the entity it annotates, and one text can serve several entities.
+
+**The runner.** A schedule row carries a time, an entity reference and a recurrence — nothing else; the plan is already in the graph. Firing resolves the target's subgraph, layers its task nodes over `depends_on` with a Kahn topological sort (cycles are refused with the offending path named), and dispatches each wave with a bounded parallelism parameter. Readiness is scoped to the current firing rather than lifetime history, so a re-run is not blocked by a completion from last week. Each run row pins the `valid_from` of the instruction text it dispatched with, and the subgraph is re-read at every frontier re-evaluation, so editing the graph mid-run steers everything not yet dispatched. Output writes back as a `produced` text node linked to the task.
 
 ![A SuperX product graph](https://raw.githubusercontent.com/k8nstantin/superx/main/superx-mod-website/img/graph.png)
 
-**Design commitments:** append-only SCD-2 throughout — updates insert versions, unlinks insert retractions, cancels append rows, and "current" is computed rather than stored. Time-ordered UUIDv7 everywhere, so the substrate is its own historical log. No hardcoded policy: every tunable is a substrate parameter, and the agent executor has no default at all — until you set it, dispatch refuses loudly.
+**Modules.** The kernel owns boot, capture, the telemetry stream and the substrate verbs; everything else is a module registered through a compile-time inventory and given its own database (`superx/<name>`) and service account, its own directory, log target, CLI namespace, substrate parameters, UUIDv7 identity, and optionally its own HTTP UI discovered from the substrate. Modules depend on the kernel and never on each other; cross-module calls go through the kernel's in-process CLI dispatch. They can be enabled and disabled on a running OS, and a module that fails to register does not stop the others from booting.
+
+**Operationally:** one command to a background OS with a self-upgrading schema (`superx --initialize`, then `restart` after a rebuild), typed Rust→TypeScript bindings across both dashboards, and three gates enforced in CI — `cargo test --workspace`, `clippy -D warnings`, and a repository-specific architecture audit that fails the build on hardcoded tunables, DDL outside approved schema files, and mutation verbs in the kernel.
 
 ### [swindex](https://github.com/k8nstantin/swindex) — hierarchical small-world graph index
 
 **[swindex.ai](https://swindex.ai)** · Rust · v0.1.0 · 142 tests
 
-Multi-hop property-graph queries in microseconds. swindex builds and persists a layered structure over your graph — Leiden communities, then a hub graph over them — and answers "what is related to X" by routing through hubs the way HNSW routes through vectors, instead of walking edges.
+An index for property graphs, not a database. It builds and persists a layered structure over a graph — Leiden communities, then a hub graph over those communities — and answers "what is related to X" by routing through hubs rather than walking edges, the way HNSW routes through vectors instead of scanning them.
 
-**It is an index, not a database.** Your data stays wherever it already lives — MySQL, Postgres, Iceberg, Parquet, Arrow, an HTTP API — and swindex sits alongside as a sidecar that narrows a multi-hop question to a small bounded set of UUIDv7 ids. Your application then goes back to its own store for the rows. Persistence is Fjall; the design target and the measured numbers are both published in the repo rather than implied.
+Data stays in whatever store already holds it: MySQL, Postgres, Iceberg, Parquet, Arrow, an HTTP API. swindex runs alongside as a sidecar, narrows a multi-hop question to a small bounded set of UUIDv7 ids, and hands them back; the application fetches the rows from its own store, so a columnar scan filtered by id replaces a graph traversal.
+
+All four architecture layers are built and persisted. Queries today route through two of them — cluster lookup plus one-hop hub expansion — with region routing and multi-hop hub navigation tracked for v0.2. Persistence is Fjall (LSM). Measured: microsecond queries at 50k-node scale; the design target and the benchmark methodology are both published in the repo rather than asserted.
 
 ### [KungFu](https://github.com/k8nstantin/kungfu) — agent-native version control
 
 Rust · Loro CRDTs
 
-Git assumes humans working sequentially; agents work concurrently, and the merge tax is paid in branch graveyards. KungFu drops branches entirely: agents splice fine-grained mutations into one stream and CRDTs merge them, every mutation signed with Ed25519, with "Ghost State" isolating an agent's work mathematically until it is ready to be seen. Exposes an MCP server so agents use it natively.
+Git assumes sequential human authorship; concurrent agents pay for that assumption in merge conflicts and abandoned branches. KungFu removes branching: agents splice fine-grained mutations into a single stream and CRDT semantics merge them without a reconciliation step. Every mutation is signed with Ed25519, and "Ghost State" keeps an agent's work mathematically isolated until it is exposed. Ships an MCP server so agents drive it directly.
 
 ### [go-leiden](https://github.com/k8nstantin/go-leiden) — the first native Go Leiden
 
 Go · zero dependencies
 
-The Go ecosystem had Louvain and no Leiden. This is a clean-room port of [graspologic-native](https://github.com/graspologic-org/graspologic-native) (Microsoft Research), the same implementation behind Microsoft GraphRAG — Leiden guarantees the well-connected communities Louvain cannot.
+The Go ecosystem had Louvain (`gonum/graph/community`) and no Leiden. This is a clean-room port of [graspologic-native](https://github.com/graspologic-org/graspologic-native) (Microsoft Research), the implementation behind Microsoft GraphRAG. Leiden's refinement phase guarantees well-connected communities, which Louvain cannot; the package covers the local-move / refinement / aggregation phases, modularity and CPM quality functions, and hierarchical clustering.
 
-It is also the case study: **written end to end by autonomous agents, with no human code commits**, driven by OpenPraxis through five manifests of chained tasks, each with a cascading prompt and a feedback loop that rewrote its own scaffold when tasks failed.
+It is also a controlled experiment: **written end to end by autonomous agents with no human code commits**, driven by OpenPraxis as five chained manifests, each task receiving a cascading prompt (product → manifest → spec → coding standards) and a feedback loop that rewrote the prompt scaffold when a task's pass rate stalled.
 
 ### [Alan](https://github.com/k8nstantin/writing-system-for-ai) — a universal writing system for the age of AI
 
 **[Live prototype](https://k8nstantin.github.io/writing-system-for-ai/)**
 
-Meaning leaks at every hand-off: human to model, model to RAG, agent to agent. Natural language is too loose and code is too low-level, so nothing carries pure intent across the loop. Alan is a spatial-geometric notation where one meaning has exactly one written form — Leibniz's *characteristica universalis*, attempted now that there is finally both a need and an engine for it.
+Meaning is re-encoded at every hand-off — human to model, model to retrieval, agent to agent — and each translation loses intent: natural language is ambiguous, code specifies action without purpose. Alan is a spatial-geometric notation in which one meaning has exactly one written form, so an instruction cannot drift as it crosses the loop. Leibniz's *characteristica universalis*, attempted with an engine that can finally read it.
 
 ### [mcps](https://github.com/k8nstantin/mcps) — MCP servers for databases
 
-Model Context Protocol servers that let agents manage real databases directly.
+Model Context Protocol servers that give agents direct, typed access to real database instances.
+
+---
+
+## Where to start
+
+These are single-author projects with room for collaborators, and the interesting parts are genuinely unclaimed. Every repo runs the same discipline: an issue defines the work, one short-lived branch per issue, the PR body opens with `Closes #N`, and the gates have to be green before merge. That is the whole ceremony.
+
+**[SuperX](https://github.com/k8nstantin/superx)** — Apache-2.0. The module contract is documented end to end in [`docs/MODULES.md`](https://github.com/k8nstantin/superx/blob/main/docs/MODULES.md), and `superx-mod-hello` exists to be copied: a module is a crate that declares a descriptor, registers itself, and gets its own database, directory, log, CLI namespace and parameters for free. A new **agent adapter** is one trait with two methods — Cursor, Codex, Copilot and Windsurf are all unclaimed, and each one widens what the OS can see. Open work also includes the [entities dashboard epic (#216)](https://github.com/k8nstantin/superx/issues/216), [module-owned parameters (#265)](https://github.com/k8nstantin/superx/issues/265), and an [HTTP verb for task instructions (#248)](https://github.com/k8nstantin/superx/issues/248).
+
+**[swindex](https://github.com/k8nstantin/swindex)** — BSL 1.1, [CONTRIBUTING.md](https://github.com/k8nstantin/swindex/blob/main/CONTRIBUTING.md), [DESIGN.md](https://github.com/k8nstantin/swindex/blob/main/DESIGN.md), [BENCHMARKS.md](https://github.com/k8nstantin/swindex/blob/main/BENCHMARKS.md). The v0.2 questions are open and specific: [hub-corridor navigation against a cluster-adjacency baseline (#72)](https://github.com/k8nstantin/swindex/issues/72) as a measured go/no-go, [region adjacency through the persisted index (#73)](https://github.com/k8nstantin/swindex/issues/73), a [Parquet source and sidecar harness (#74)](https://github.com/k8nstantin/swindex/issues/74), and an [elastic-hashing investigation (#35)](https://github.com/k8nstantin/swindex/issues/35) for the hot path. Benchmarks and adversarial review of the design are as welcome as code — [#44](https://github.com/k8nstantin/swindex/issues/44) is exactly that, an invited database-architect pass.
+
+**[KungFu](https://github.com/k8nstantin/kungfu)** — [CONTRIBUTING.md](https://github.com/k8nstantin/kungfu/blob/main/CONTRIBUTING.md), [DESIGN.md](https://github.com/k8nstantin/kungfu/blob/main/DESIGN.md), roadmap in [#10](https://github.com/k8nstantin/kungfu/issues/10). CRDT semantics, AST-aware validation and agent patching are the live threads.
+
+**[go-leiden](https://github.com/k8nstantin/go-leiden)** — the smallest on-ramp: [`sync.Pool` in the refinement phase (#8)](https://github.com/k8nstantin/go-leiden/issues/8) to cut GC pressure at scale, and a [comparison against newer prior art (#10)](https://github.com/k8nstantin/go-leiden/issues/10).
+
+Useful without writing code: run any of it against a workload it was not designed for and file what breaks. Benchmarks on hardware I do not have. Design critique on the open architecture issues — the graph-index work in particular benefits more from someone finding the flaw early than from another feature. Reach me through issues on the relevant repo, or [LinkedIn](https://www.linkedin.com/in/constantin-alexander/).
 
 ---
 
 ## [OpenPraxis](https://github.com/k8nstantin/OpenPraxis) — the predecessor to SuperX
 
-Go · 19k+ lines · superseded, kept public as prior art
+Go · ~19k lines · superseded, kept public as prior art
 
-OpenPraxis was the first attempt at the same thesis: a spec-driven platform where products decompose into manifests and task DAGs, and agents execute them in isolated git worktrees, commit, push and open PRs autonomously. A single Go binary with an MCP server, an HTTP dashboard, mDNS peer discovery and Automerge CRDT sync.
+A spec-driven platform where products decompose into manifests and task DAGs and agents execute them in isolated git worktrees — commit, push, open a PR — as a single binary carrying an MCP server, an HTTP dashboard, mDNS peer discovery and Automerge CRDT sync.
 
-**What it proved:** agents cannot be trusted to self-govern, and the fix is structural. Rules the agent must acknowledge and cannot override. An audit it cannot see or skip. Every dollar and turn attributed to the spec that caused it. Memory that survives the session. Products as graphs rather than tickets.
+**What it established:** agents do not reliably self-report completion, so verification has to run server-side where the agent cannot see or skip it; constraints have to be acknowledged before work starts and checked mechanically afterwards; cost and turns have to attribute back to the spec that caused them; and memory has to outlive the session.
 
-**What it taught me, and what SuperX does differently:** one node table and one edge table with kinds as data, instead of five entity tables that had to be collapsed later. Lifecycle derived from an append-only event log rather than a status column that drifts. A verdict as typed data rather than free text. The instruction stream — not a template table — as the surface where prompts actually evolve. And insert-only as a hard rule, so that history cannot be destroyed by a migration.
+**What the rewrite changed.** One node table and one edge table with kinds as data, rather than five entity tables that later had to be collapsed into one. Lifecycle derived from an append-only event log instead of a status column that no code path ever closed. Verdicts as typed records rather than free text — collapsing comment types into one alias silently turned "was this approved" into a question nothing could answer. The per-entity instruction stream, not a template table, as the surface where prompts actually evolve, because that is where every real prompt was written. And insert-only as a hard rule: OpenPraxis dropped sixteen tables at boot as its migration strategy, which is not recoverable.
 
 SuperX is that rewrite, in Rust, on an append-only substrate.
 
