@@ -82,7 +82,7 @@ These are single-author projects with room for collaborators, and the interestin
 
 **[go-leiden](https://github.com/k8nstantin/go-leiden)** — the smallest on-ramp: [`sync.Pool` in the refinement phase (#8)](https://github.com/k8nstantin/go-leiden/issues/8) to cut GC pressure at scale, and a [comparison against newer prior art (#10)](https://github.com/k8nstantin/go-leiden/issues/10).
 
-Useful without writing code: run any of it against a workload it was not designed for and file what breaks. Benchmarks on hardware I do not have. Design critique on the open architecture issues — the graph-index work in particular benefits more from someone finding the flaw early than from another feature. Reach me through issues on the relevant repo, or [LinkedIn](https://www.linkedin.com/in/constantin-alexander/).
+Useful without writing code: run any of it against a workload it was not designed for and file what breaks. Benchmarks on hardware I do not have. Design critique on the open architecture issues — the graph-index work in particular benefits more from someone finding the flaw early than from another feature. Questions that are not bug reports belong in Discussions — [SuperX](https://github.com/k8nstantin/superx/discussions), [swindex](https://github.com/k8nstantin/swindex/discussions), [KungFu](https://github.com/k8nstantin/kungfu/discussions), [go-leiden](https://github.com/k8nstantin/go-leiden/discussions) — and anything with a reproduction belongs in an issue on that repo. I also read [LinkedIn](https://www.linkedin.com/in/constantin-alexander/).
 
 ---
 
